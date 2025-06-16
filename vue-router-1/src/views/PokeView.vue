@@ -3,9 +3,13 @@
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router' //useRoute es el unico que tiene acceso a parametros
 import {useGetData} from '@/composables/getData';
+import {useFavoritosStore} from '@/store/favoritos.js';
 
 const route = useRoute();
 const router = useRouter();
+const useFavoritos = useFavoritosStore();
+
+const {addfavoritos, findPoke} = useFavoritos;
 
 const { data, getData, loading, errorData} = useGetData(); /* usando composables */
 
@@ -43,8 +47,10 @@ getData(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`);
                 <!-- <img :src="poke.sprites?.front_default" alt=""/> -->
               <img :src="data.sprites?.front_default" class="card-img-top img-fluid" alt="...">
               <div class="card-body">
-                <h5 class="card-title text-dark">Pokemon Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted ">{{ $route.params.name }}</h6>                 <!-- agregando ? : la info se mostrara si esta disponible sino no -->
+                <!-- AÑADIR A FAVORITOS -->
+              <button :disabled="findPoke(data.name)" type="button" class="btn btn-primary" @click="addfavoritos(data)">Añadir Favorito</button>
+                <h5 class="card-subtitle mb-2 text-muted mt-3">{{ $route.params.name }}</h5>
+                <!-- agregando ? : la info se mostrara si esta disponible sino no -->
             </div>
            </div>
         <button @click="back" class="btn btn-primary mt-2">Atras</button>
