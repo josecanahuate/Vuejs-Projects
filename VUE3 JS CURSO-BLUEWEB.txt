@@ -1,0 +1,24 @@
+///////////////// Crear nuevo Proyecto en Vue:
+
+**** Forma 1:
+
+npm create vue@latest
+No x7 
+cd <your-project-name>
+npm install
+npm run dev
+
+
+**** Forma 2:
+vue create nombre-proyecto 
+npm run serve
+
+
+/////////////////// INSTALACION DE BOOTSTRAP EN VUE
+
+1- npm install bootstrap
+
+2- Llamarlo en el main.js
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+
+3- 

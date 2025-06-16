@@ -1,0 +1,1 @@
+onMounted: muestra la data una vez se termina de cargar todo.

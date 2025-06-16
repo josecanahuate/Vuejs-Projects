@@ -1,0 +1,200 @@
+******************** TUTORIAL VUE ***********************
+* PARA CREAR UN NUEVO PROYECTO EN VUE:
+    vue create nombre-proyecto 
+
+    vue create ejercicio-1-vue 
+
+EJECUTAR PROYECTO:
+    npm run serve
+    
+
+***** SNIPPETS DE VUE
+https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode
+
+pegar aca C:\Users\USER\AppData\Roaming\Code\User\snippets\vue.json
+archivos-> preferencias -> configurar fragmentos de usuario -> seleccionar vue y pegar el json que te da la pagina anterior
+
+
+
+
+* ESTRUCTURA DE UN COMPONENTE  DE VUE (APP.VUE):
+
+    vue create component nombre-del-componente
+
+<template>
+    <!-- Contenido del template -->
+</template>
+
+<script>
+export default {
+    // Propiedades y métodos de la instancia de Vue
+}
+</script>
+
+<style scoped>
+/* Estilos CSS para este componente */
+</style>
+
+
+
+*************** IMPORTANTE *******************
+Para que los estilos se apliquen correctamente a un solo componente, 
+es necesario agregar el atributo "scoped" en la etiqueta <style>
+
+EN el app.vue, se coloca los estilos generales por lo que no lleva el atributo "scoped",
+este atributo es solo para los componentes.
+
+
+***** COMPONENTES OPTION API VS COMPOSITION API 
+
+*********************** OPTION API ***********************
+<template>
+    <div class="">
+        <h3>{{ contador }}</h3>
+    </div>
+    <button @click="incrementar">Incrementar</button>
+    <button @click="reducir">Reducir</button>
+  </template>
+  
+  <script>
+    import { defineComponent } from "vue";
+    export default defineComponent({
+        name: 'CounterOption',
+        components: {},
+        data() {
+            let contador = 0;
+            return {contador}  
+        },
+        methods:{
+           incrementar() {
+               this.contador++
+           }, 
+           reducir() {
+               this.contador--
+           }, 
+       }
+    })
+  </script>
+
+
+*********************** COMPOSITION API ***********************
+En  este caso, utilizamos setup(), que es una función especial de Vuejs 3.
+#USO DE HOOKS
+
+LESSION 1 - 
+- INTRODUCCION A VUE
+- ESTRUCTURA DE UN COMPONENTE (template, script setup, style)
+- Script setup
+- Style scoped -> (se usa scoped) Para solo darle estilos al componente.
+- CREAMOS 3 COMPONENTES (POST CONTAINER, POSTCARD, POSTBUTTON)
+- CREAMOS UN EJEMPLO DE CONTADOR, USANDO OPTION API, Y COUNTER COMPOSITION API. (composition API ES LA FORMA ACTUAL DE 
+  ESTRUCTURAR LOS COMPONENTES) 
+
+--------------------------------------------------------------------------------------------------------------------------------
+LESSION 2 - DIRECTIVAS DE VUE
+- Directivas personalizadas -> v-postcontainer, v-postcard, v-postbutton
+- Directivas nativas -> v-model, v-show, v-if...
+- Uso de directivas en el template
+
+DIRECTIVAS SELECTIVAS 
+v-if ="condicion" -> muestra o no lo que esta dentro del elemento con la directiva
+v-else -> muestra lo que esta fuera de la condición if
+v-show -> muestra siempre pero oculta o no el contenido
+
+v-for ->  para recorrer un array y mostrarlo en pantalla
+          item en items -> variable asignada a cada uno de los elementos del array
+          index en items -> indice del elemento actual del bucle
+          of items -> cantidad total de elementos del array
+
+
+v-bind ->  : -> se utiliza para pasar propiedades dinamicas a un elemento html
+            Ej: <input type="text" :value="message">
+                 message -> variable que queremos pasar como valor a value
+
+el v-bind  se puede abreviar a : , por lo tanto :value = "message" es igual a :value=message
+
+ejemplo en vez de colocar v-bind:class="{'danger': hasError}" 
+COLOCAMOS :class = "{ 'danger': hasError }"
+
+
+
+LESION 3 - FORMULARIOS * v-model
+- Se utiliza para crear campos de formularios
+- Es una forma sencilla de hacer dos way data binding
+v-model?  .la propiedad que le pasamos a v-model debe ser una variable declarada en el script setup
+
+
+V-MODEL TIPADO -> Permite indicar el tipo de dato que va a tener nuestro input
+              -> Por defecto si no ponemos nada es string
+              -> number -> numerico
+              -> boolean -> checkbox
+              -> object -> objeto json
+              -> array -> arreglos []
+
+
+
+EJERCICIO 1 - PONIENTO EN PRACTICA TODO LO APRENDIDO HASTA EL MOMENTO
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+LESION 4 - Comunicación Vertical Y Ciclo De Vida -> COMUNICACION ENTRE COMPONENTES
+
+****Ciclo de vida del componente
+
+- mounted() -> se ejecuta cuando el DOM ha sido renderizado
+- created() -> se ejecuta justo después de la inicialización del componentes, antes de que se monte al DOM
+- beforeCreate() -> se ejecuta justo antes de la creación del componente
+- beforeMounted() -> se ejecuta justo antes de que el DOM sea montado
+- beforeUpdate() -> se ejecuta justo antes de actualizar los datos del DOM
+- updated() -> se ejecuta luego de actualizar los datos del DOM
+- errorCaptured(err) -> captura cualquier error que ocurra dentro del componente y nos permite manejarlo
+- unmounted() -> se ejecuta cuando el componente ya no está en el DOM
+
+PARÁMETROS OPCIONALES DE LAS FUNSIONES DE CYCLO DE VIDA
+- this representa al contexto del componente (this.nombreDeLaPropiedad)
+- onCompleted -> función que se ejecutará cuando todo este bien
+- onCancelled -> función que se ejecutará cuando algo falle
+
+
+*** Comunicacion Vertical (comunicacion entre componentes): 
+
+Tipos:
+    -ascendente (emmit)
+si un hijo quiere comunicar un cambio o solicitar una accion a su componente padre puede comunicarselo
+de forma vertical hacia arriba. CON emmit
+
+
+    -descendente (props)
+cuando el componente padre pasa informacion a sus componentes hijos
+si el padre le esta pasando informacion al hijo, las props deben pasarse en modo lectura
+los componentes hijo no pueden modificar informacion
+
+
+***Comunicación Horizontal (comunicacion entre componentos hermanos):
+
+
+
+
+
+EJERCICIO 
+
+
+
+------------------------------------------------------------------------------
+
+BLUEWEB CURSO
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+LESION  - PROPS Y EMITIR EVENTOS
+- Propiedades -> son datos enviados desde un padre a un hijo
+- Props -> se reciben en el script y se pueden usar en el template
+- Tipado de props -> :propName = "tipoDeDato"
+- Eventos -> son acciones que se ejecutan en un hijo
+- Emitting events -> emitir eventos -> @eventName="funcionDelPadre

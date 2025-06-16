@@ -1,0 +1,215 @@
+************** VUE CURSO (BLUEWEB) + Vite + Firebase 9 + MEVN ****************
+
+*** Fundamentos de JS
+
+https://bluuweb.github.io/javascript/fundamentos/
+
+
+
+************************* Diferencias entre var, let, const ******************
+
+
+var -> var permite declara la variable varias veces (YA VAR NO SE USA)
+
+let -> let no nos permite declara la variable varias veces
+
+const -> las constantes cuando estan dentro de un objeto o array se le puede cambiar su valor, de lo contrario no permite cambiar el valor.
+
+
+**** FUNCIONES
+
+se declaran usando 'function'
+
+function sumar () {
+console.log(10)
+}
+sumar()
+
+
+***Funciones de Flecha
+
+const sumarDos = () => {
+console.log(20)
+}
+sumarDos()
+
+***Funciones de Flecha con Parametro
+const sumarDos = (num) => {
+console.log(num)
+}
+sumarDos(20)
+
+
+const sumaTres = (num) => {
+  console.log(num + 3)
+}
+sumaTres(9)
+
+//Template String 
+const numero = (num1, num2) => {
+    return (num1 + num2)
+}
+const resultado = numero(10, 20)
+console.log(resultado)
+
+
+// OBjetos 
+const mascota = {
+  nombre: 'Pepe',
+  edad: 20,
+  tipo: 'Gato',
+  colorArray: ['ojos marrones', ' cabello negro', ' cola larga']
+}
+
+console.log(mascota);
+console.log("Nombre: " + mascota.nombre);
+console.log("Edad: " + mascota.edad);
+console.log("Tipo: " + mascota.tipo);
+console.log("Color: " + mascota.colorArray);
+console.log("Color: " + mascota.colorArray[0]);
+console.log("Cabello: " + mascota.colorArray[1]);
+console.log("Cola: " + mascota.colorArray[2]);
+
+
+
+ 	  ############### OBjeto Destructurado #####################
+
+console.log("############### OBjeto Destructurado #####################");
+//Objeto Destructurado 
+const mascota2 = {
+  nombre: 'Pepe',
+  edad: 20,
+  tipo: 'Gato',
+  colorArray: ['ojos marrones', ' cabello negro', ' cola larga']
+}
+const {nombre, edad} = mascota2
+
+console.log(nombre);
+console.log(edad);
+
+// Practica 
+const web = {
+  nombre: 'blueweb',
+  links: {
+    enlace: 'www.blueweb.com'
+  },
+    redesSociales: {
+      youtube: {
+        nombre: 'ytblueweb',
+        enlace: 'yt/www.blueweb.com',
+  }
+    } 
+}
+const enlaceYt = web.redesSociales.youtube.enlace;
+console.log("Enlace: " + enlaceYt);
+
+
+
+******************************** FETCH ************************************
+// FETCH API 
+//podemos usar .then con ()cuando es mas de 1 parametro y sin () cuando es solo 1 parametro
+console.log("############### Consumo de API ###############");
+//fetch para leer api's
+fetch("https://pokeapi.co/api/v2/pokemon/") 
+.then((res) => { //el then espera una promesa
+  return res.json()
+}) 
+.then((data) => {
+console.log(data.results)
+data.results.forEach(element => {
+  console.log(element.name)
+})
+})
+.catch(error => console.log(error))
+
+
+console.log("############### Consumo de API ###############");
+fetch("https://pokeapi.co/api/v2/pokemon/") 
+.then(res => res.json())
+.then(data => {
+/* console.log(data.results) */
+data.results.forEach(element => {
+  console.log(element.name)
+});
+})
+.catch(error => console.log(error))
+
+
+
+
+***************************** ASYNC AND AWAIT *******************************
+
+
+//async await
+const obtenerPokemones = async () => {
+  try {
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/");
+    const data = await res.json();
+    data.results.forEach(element => {
+      console.log(element.name);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+obtenerPokemones();
+
+
+*************************************** MAPS *******************************
+
+//map recorre el array
+const obtenerPokemones = async() => {
+  try {
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/");
+    const data = await res.json();
+    console.log(data.results)
+    const arrayNombres = data.results.map(poke => poke.name)
+    console.log(arrayNombres)
+  } catch (error) {
+    console.log(error);
+  }
+}
+obtenerPokemones();
+
+
+*************************************** FILTER *******************************
+
+//nombre === a bulbasaur
+const obtenerPokemones = async() => {
+  try {
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/");
+    const data = await res.json();
+    /* console.log(data.results) */
+    const arrayNombres = data.results.filter(poke => poke.name === 'bulbasaur')
+    console.log(arrayNombres)
+  } catch (error) {
+    console.log(error);
+  }
+}
+obtenerPokemones();
+
+
+//distinto a bulbasaur
+const obtenerPokemones = async() => {
+  try {
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon/");
+    const data = await res.json();
+    /* console.log(data.results) */
+    const arrayNombres = data.results.filter(poke => poke.name !== 'bulbasaur')
+    console.log(arrayNombres)
+  } catch (error) {
+    console.log(error);
+  }
+}
+obtenerPokemones();
+
+
+
+
+
+
+
+
+
+
+

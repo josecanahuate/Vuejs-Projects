@@ -1,0 +1,184 @@
+      ****************** VUE3 + VUEX + API MEAL PROJECT *********************
+
+PUBLIC API -> https://github.com/public-apis/public-apis
+
+API MEAL -> https://www.themealdb.com/api.php
+
+GitHub -> https://github.com/thecodeholic/vue-meals-app
+
+
+******Crear Proyecto
+
+1- npm create vite@latest
+2- nombre-proyecto
+3- vue
+4-JavaScript
+5- cd nombre-proyecto
+6- npm install
+7- npm run dev
+
+
+
+*****Estructura App.vue
+
+<script setup>
+import HelloWorld from './components/HelloWorld.vue'
+</script>
+
+<template>
+</template>
+
+
+<style scoped>
+</style>
+
+
+O COMO PREFIERE EL MAN DEL VIDEO ASI:
+
+<template>
+</template>
+
+<script setup>
+</script>
+
+<style scoped>
+</style>
+
+
+***********INSTALAR TAILWIND CSS
+https://tailwindcss.com/docs/guides/vite
+
+***cd my-project
+
+1- npm install -D tailwindcss postcss autoprefixer
+
+2- npx tailwindcss init -p
+
+
+3- Configure your template paths
+Add the paths to all of your template files in your tailwind.config.js file.
+
+tailwind.config.js
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+
+4- Add the Tailwind directives to your CSS
+Add the @tailwind directives for each of Tailwind’s layers to your ./src/style.css file. vue-js-search-meals\src\style.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+5- npm run dev
+
+
+***************INSTALAR ROUTER EN VUE
+
+1- npm install vue-router@4
+
+2- CREAR EL ARCHIVO DE RUTA EN en folder src
+
+con esto sea crea el folder y el archivo.
+crear carpeta router y dentro index.js
+
+router/index.js
+
+**El index.js es el archivo donde manejaremos las rutas.
+
+debemos importar router en main.js
+
+views == pages
+
+
+HASTA ESTE MOMENTO SOLO HEMOS CONFIGURADO EL VIEW HOME.
+
+****AHORA INSTALAREMOS VUEX
+
+npm install vuex@4 -S
+
+
+PARA CREAR UN PROYECTO ESCALABLE USAMOS ESTO: src\store
+const store = createStore({
+    state, 
+    actions,
+    mutations,
+    getters,
+})
+
+
+*****INSTALAR TAILWIND CSS FORMS
+
+https://github.com/tailwindlabs/tailwindcss-forms
+
+1- npm install -D @tailwindcss/forms
+
+2- Then add the plugin to your tailwind.config.js file:
+
+// tailwind.config.js
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
+
+
+
+*****INSTALAR AXIOS
+https://www.npmjs.com/package/axios
+
+npm install -S axios
+
+Crear src\axiosClient.js
+
+Creating an instance
+You can create a new instance of axios with a custom config.
+
+axios.create([config])
+const instance = axios.create({
+  baseURL: 'https://some-domain.com/api/',
+  timeout: 1000,
+  headers: {'X-Custom-Header': 'foobar'}
+});
+
+
+
+
+******VAMOS A LISTAR TODOS LOS INGREDIENTES
+
+www.themealdb.com/api/json/v1/1/list.php?i=list
+
+
+
+******VAMOS A LISTAR TODOS LAS COMIDAS POR NOMBRE
+Search meal by name
+www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+
+
+function searchMeals() {
+    axiosClient.get(`/search.php?s=${keyword.value}`);
+}
+
+
+    <div>
+      <!-- <pre> {{ searchedMeals }}</pre> -->
+      <div v-for="meal of meals" :key="meal.idMeal">
+        <img :src="meal.strMealthumb" alt="strMeal">
+        <h3>{{ meal.strMeal }}</h3>
+        <div>
+            <a :href="meal.strYoutube" target="_blank">Youtube</a>
+            <router-link to="/">
+                View
+            </router-link>
+        </div>
+    </div>
+    </div>
